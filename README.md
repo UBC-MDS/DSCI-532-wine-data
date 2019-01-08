@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # A wine recommending application 
 
 
@@ -23,3 +24,7 @@ So, needless to say, he was looking forward to educating himself a little. This 
 
 ### Description of your app
 
+=======
+# DSCI-532-wine-data
+Shiny app to recommend wine based on preferences.
+>>>>>>> upstream/master
