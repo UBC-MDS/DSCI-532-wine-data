@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# A wine recommending application 
+# A wine recommending application
 
 
 | **Team Members** |
@@ -9,7 +8,7 @@
 
 ### Overview
 
-The dataset we are using is from Kaggle and it covers 150k wine reviews along with some attributes of the wine. The aim of the project is to give an overview of worldwide wine clues, for example, the relation between price and quality(points), the countries where the wines are made or perform an analysis of the most used words to describe wines. 
+The dataset we are using is from Kaggle and it covers 150k wine reviews along with some attributes of the wine. The aim of the project is to give an overview of worldwide wine clues, for example, the relation between price and quality(points), the countries where the wines are made or perform an analysis of the most used words to describe wines.
 
 ### Description of the data
 
@@ -23,8 +22,3 @@ So, needless to say, he was looking forward to educating himself a little. This 
 
 
 ### Description of your app
-
-=======
-# DSCI-532-wine-data
-Shiny app to recommend wine based on preferences.
->>>>>>> upstream/master
