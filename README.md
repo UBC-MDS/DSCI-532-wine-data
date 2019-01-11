@@ -22,3 +22,10 @@ So, needless to say, he was looking forward to educating himself a little. This 
 
 
 ### Description of your app
+
+We plan to use the shiny dashboard library for a dashboard look of our app. The main dashboard view will have the word cloud and the line graph of ratings of different wines. It will also feature a world map showing the different places of which we have the wine data. The filters will include the price and variety of the wine for now. We will see if including more/different filters for our data makes sense. The app will have three tabs. The `main tab` will feature the dashboard, the second `Data` tab will have the data table of the different wines from across the world and the `About` tab will be an informational tab from where the wine enthusiasts will get information on how to use the shiny app. The `data` tab will also have a `download` and an `upload` button to use new data or to download the data which the user has filtered in the dashboard.
+
+![](wine-dashboard.jpg)
+
+
+
