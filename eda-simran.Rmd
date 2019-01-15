@@ -1,0 +1,32 @@
+---
+title: "eda"
+author: "Simran Sethi"
+date: '2019-01-14'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EDA on wine data
+
+
+Loading in the data:
+```{r}
+dat <- read_csv("data/winemag-data-130k-v2.csv")
+```
+
+Extracting vintage year of wine from title column:
+```{r}
+extract_year <- function(string){
+  regx <- regmatches(string, regexec("[0-9]{4}", string))
+  sapply(regx, function(x){
+    if(length(x)>0) return(as.numeric(x))
+    else return(NA)
+  })
+}
+
+dat$vintage_year <- extract_year(as.character(dat$title))
+```
+
