@@ -29,11 +29,6 @@ shinyUI(dashboardPage
                                    br(),
                                    br(),
                                    plotOutput("wc"),
-                                   # verbatimTextOutput("click"),
-                                   # downloadButton("download", "Download results"),
-                                   # br(),
-                                   # #tableOutput("results")
-                                   # DT::dataTableOutput("results"),
                                    tags$head(
                                      tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
                                    )
