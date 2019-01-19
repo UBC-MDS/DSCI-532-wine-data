@@ -1,25 +1,55 @@
-fluidPage(
-  # Application title
-  titlePanel("Word Cloud"),
-  
-  sidebarLayout(
-    # Sidebar with a slider and selection inputs
-    sidebarPanel(
-      selectInput("selection", "Choose a wine:",
-                  choices = wines),
-      actionButton("update", "Change"),
-      hr(),
-      sliderInput("freq",
-                  "Minimum Frequency:",
-                  min = 1,  max = 5, value = 5),
-      sliderInput("max",
-                  "Maximum Number of Words:",
-                  min = 1,  max = 30,  value = 30)
-    ),
-    
-    # Show Word Cloud
-    mainPanel(
-      plotOutput("plot")
-    )
-  )
+# UI file for shiny
+
+shinyUI(dashboardPage
+        ( skin = "red",
+                       #Application title
+                       dashboardHeader(title = "Wine Data Analysis",titleWidth = 400),
+                       
+                       # dashboard sidebar functions will be inserted here
+                       dashboardSidebar(
+                         
+                         sidebarMenu(
+                           menuItem("Main",tabName = "main",icon = icon("dashboard")),
+                           menuItem("Data",tabName = "data",icon = icon("table")),
+                           menuItem("Info",tabName = "info",icon = icon("info-circle"))
+                         ),
+                         selectInput("cloudCountry", "Country", 
+                                     c("All countries"="", sort(unique(as.character(dat2$country)))), multiple=TRUE,
+                                     selected = c('Australia','Canada','Italy','Chile','Greece','France')),
+                         selectInput("cloudVariety", "Variety", 
+                                     c("All varieties"="", sort(unique(as.character(dat2$variety)))), multiple=TRUE)
+                       ),
+                       # functions that must go in the body of the dashboard.
+                       dashboardBody(
+                         tabItems(
+                           tabItem(tabName = "main",
+                                   plotlyOutput("wm"),
+                                   br(),
+                                   br(),
+                                   br(),
+                                   br(),
+                                   plotOutput("wc"),
+                                   # verbatimTextOutput("click"),
+                                   # downloadButton("download", "Download results"),
+                                   # br(),
+                                   # #tableOutput("results")
+                                   # DT::dataTableOutput("results"),
+                                   tags$head(
+                                     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
+                                   )
+                           ),
+                           tabItem(tabName = "data",
+                                   downloadButton("download", "Download results"),
+                                   br(),
+                                   br(),
+                                   br(),
+                                   DT::dataTableOutput("results")
+                           ),
+                           tabItem(tabName = "info",
+                                   includeMarkdown("info.md"),
+                                   hr()
+                           )
+                         )
+                       )
+)
 )
