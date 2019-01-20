@@ -15,20 +15,30 @@ shinyUI(dashboardPage
                          ),
                          selectInput("cloudCountry", "Country", 
                                      c("All countries"="", sort(unique(as.character(dat2$country)))), multiple=TRUE,
-                                     selected = c('Australia','Canada','Italy','Chile','Greece','France')),
+                                     selected = c('Australia','Canada','Italy','US','Greece','France')),
                          selectInput("cloudVariety", "Variety", 
-                                     c("All varieties"="", sort(unique(as.character(dat2$variety)))), multiple=TRUE)
+                                     c("All varieties"="", sort(unique(as.character(dat2$variety)))), multiple=TRUE),
+                         numericInput("maxPrice", "Max Price:", 30, min = 0),
+                         selectInput("Province", "Province", 
+                                     c("All province"="", sort(unique(as.character(dat2$province)))), multiple = TRUE,
+                                     selected = c('Oregon', 'Washington'))
                        ),
                        # functions that must go in the body of the dashboard.
                        dashboardBody(
                          tabItems(
                            tabItem(tabName = "main",
+                                   fluidRow(
+                                     
+                                     column(width = 6,
+                                            plotlyOutput("winePlot1")),
+                                     column(width = 6,
+                                            plotOutput("wc"))
+                                            
+                                    
+                                     
+                                   ),
+                                   br(),
                                    plotlyOutput("wm"),
-                                   br(),
-                                   br(),
-                                   br(),
-                                   br(),
-                                   plotOutput("wc"),
                                    tags$head(
                                      tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
                                    )
