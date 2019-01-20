@@ -75,7 +75,11 @@ function(input, output, session) {
                           breaks = c(0, 1, 10, 100, 1000, 10000))+
       ggtitle("World Map of Wines")+
       theme_void()
-    
+
+    gg <- ggplotly(g)
+    gg
+  })
+  
   output$winePlot1 = renderPlotly({
     data = dat2%>% 
       filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
@@ -87,9 +91,5 @@ function(input, output, session) {
       ggtitle("Cost versus Rating") +
       xlab("Rating (out of 100)") + ylab("Price ($)") + 
       theme(legend.position="bottom")
-    })
-
-    gg <- ggplotly(g)
-    gg
   })
 }

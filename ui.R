@@ -18,7 +18,7 @@ shinyUI(dashboardPage
                                      selected = c('Australia','Canada','Italy','US','Greece','France')),
                          selectInput("cloudVariety", "Variety", 
                                      c("All varieties"="", sort(unique(as.character(dat2$variety)))), multiple=TRUE),
-                         numericInput("maxPrice", "Max Price:", 30, min = 0),
+                         numericInput("maxPrice", "Max Price:", 800, min = 0, max = 3300),
                          selectInput("Province", "Province", 
                                      c("All province"="", sort(unique(as.character(dat2$province)))), multiple = TRUE,
                                      selected = c('Oregon', 'Washington'))
