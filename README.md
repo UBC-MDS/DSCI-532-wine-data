@@ -1,10 +1,9 @@
 # A wine recommending application
 
+### Link to the app
 
-| **Team Members** |
-| -- |
-| Sreya Guha |
-| Simran Sethi |
+[https://simranubc.shinyapps.io/Wine-data-analysis/](https://simranubc.shinyapps.io/Wine-data-analysis/)
+
 
 ### Overview
 
@@ -27,5 +26,8 @@ We plan to use the shiny dashboard library for a dashboard look of our app. The 
 
 ![](app_sketch1.png)
 
-
+| **Team Members** |
+| -- |
+| Sreya Guha |
+| Simran Sethi |
 
