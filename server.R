@@ -10,6 +10,13 @@ function(input, output, session) {
     data_React
   })
   
+  #Observers for filters and inputs
+  values1 = reactiveValues(default = 0)
+  observeEvent(input$action, {values1$default = input$action}) 
+  dataInput2 = eventReactive(input$action, {input$maxPrice})
+  dataInput3 = eventReactive(input$action, {input$Province})
+  
+  
   output$results <- DT::renderDataTable(
     data_reactive(),
     options = list(scrollX = TRUE)
@@ -28,7 +35,7 @@ function(input, output, session) {
     df = dat2 %>% 
       filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
              is.null(input$cloudVariety) | variety %in% input$cloudVariety
-      )
+      ) %>% filter (price < input$maxPrice) %>% filter(province %in% input$Province)
       
     
     wordcloud_rep <- repeatable(wordcloud)
@@ -38,7 +45,7 @@ function(input, output, session) {
     wordcloud_rep(names(v), v, scale=c(4,0.5),
                   min.freq = 10, max.words=50,
                   colors=brewer.pal(8, "Dark2"))
-    title(main = 'unigram world cloud', font.main = 3)#, cex.main = 1.5)
+    title(main = 'Unigram World Cloud', font.main = 4)#, cex.main = 1.5)
   })
   
   output$wm <- renderPlotly({
@@ -55,7 +62,7 @@ function(input, output, session) {
                 by.y = 'country',
                 all.x = T,
                 all.y = F,
-                sort = F)
+                sort = T)
 
     mfinal <- mfinal[order(mfinal$order),]
     mfinal[is.na(N), N:=0]
@@ -66,11 +73,23 @@ function(input, output, session) {
       coord_equal()+
       scale_fill_gradient(low = '#ffffff', high = "#cc0000", trans = "log", na.value = "#c994c7", 
                           breaks = c(0, 1, 10, 100, 1000, 10000))+
-      ggtitle("World map of wines")+
+      ggtitle("World Map of Wines")+
       theme_void()
+    
+  output$winePlot1 = renderPlotly({
+    data = dat2%>% 
+      filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
+             is.null(input$cloudVariety) | variety %in% input$cloudVariety
+      ) %>% filter (price < input$maxPrice)%>% filter(province %in% input$Province)
+    length = nrow(data)
+    ggplot(data, aes(x = points , y= price, color = country)) + geom_point() + 
+      geom_jitter() + 
+      ggtitle("Cost versus Rating") +
+      xlab("Rating (out of 100)") + ylab("Price ($)") + 
+      theme(legend.position="bottom")
+    })
 
-
-    gg <- ggplotly(g, tooltip = "text")
+    gg <- ggplotly(g)
     gg
   })
 }
