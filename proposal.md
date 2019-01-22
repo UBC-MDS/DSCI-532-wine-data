@@ -16,7 +16,7 @@ Have you ever been wine shopping and wondered what wine to buy to serve for the 
 we obtained a data set of reviews for over 110,000 different wines published by Wine Enthusiast magazine between 1999 and 2017. The wines reviewed originated from 42 different countries and ranged in price from $4 to $3300. Reviews were written by at least 20 different professional wine tasters (some anonymous) and included a rating of the wine on a 100-point scale. The data has 120,000 unique wine ratings from different wine tasters across 16,000 unique wineries. The data also has important information regarding the wine such as price, the location where it was grown, in addition to the points given to it by different tasters. Other relevant information includes the type of wine being rated and the twitter handle of the wine taster if in case someone wants to reach out to the source of the rating. In addition to this, we will be calculating a score for each wine on the basis of points it has received from different tasters.
 
 | Wine Quality | Wine Rating |
-| -- |
+| -- |------|
 | Classic | 95-100 |
 | Superb | 90-94 |
 | Excellent | 80-89 |
