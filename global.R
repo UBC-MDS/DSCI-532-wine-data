@@ -18,7 +18,8 @@ library("ggjoy")
 set.seed(123)
 
 
-dat <- read_csv("winemag_data_130k_v2.csv")
+#dat <- read_csv("winemag_data_130k_v2.csv")
+dat <- read_csv("data/clean_wine_data.csv")
 dat <- unique(dat[,-1])
 
 extract_year <- function(string){
@@ -29,7 +30,7 @@ extract_year <- function(string){
   })
 }
 
-dat$vintage_year <- extract_year(as.character(dat$title))
+#dat$vintage_year <- extract_year(as.character(dat$title))
 
 wines <- unique(dat$variety)
 
