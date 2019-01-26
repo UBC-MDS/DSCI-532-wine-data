@@ -56,7 +56,7 @@ function(input, output, session) {
     wordcloud_rep(names(v), v, scale=c(4,0.5),
                   min.freq = 10, max.words=40,
                   colors=brewer.pal(8, "Dark2"))
-    title(main = 'Unigram World Cloud', font.main = 4)#, cex.main = 1.5)
+    title(main = 'Unigram Word Cloud', font.main = 4)#, cex.main = 1.5)
   })
   
   # wordmap plot based on input filters
