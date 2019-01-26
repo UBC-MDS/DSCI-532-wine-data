@@ -1,14 +1,14 @@
 function(input, output, session) {
- 
+  
   # making reactive buttons for the user inputs 
   data_reactive <- reactive({
     data_React <- dat2 %>% filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
-                                is.null(input$cloudVariety) | variety %in% input$cloudVariety,
-                                is.null(input$cloudGrape) | Grape %in% input$cloudGrape,
-                                price > input$WinePrice[1],
-                                price < input$WinePrice[2],
-                                points > input$WineRating[1],
-                                points < input$WineRating[2])
+                                  is.null(input$cloudVariety) | variety %in% input$cloudVariety,
+                                  is.null(input$cloudGrape) | Grape %in% input$cloudGrape,
+                                  price > input$WinePrice[1],
+                                  price < input$WinePrice[2],
+                                  points > input$WineRating[1],
+                                  points < input$WineRating[2])
     
     if(nrow(data_React)==0){
       return(NULL)
@@ -47,7 +47,7 @@ function(input, output, session) {
              points > input$WineRating[1],
              points < input$WineRating[2]
       ) 
-      
+    
     
     wordcloud_rep <- repeatable(wordcloud)
     
@@ -66,20 +66,20 @@ function(input, output, session) {
     datfinal[country == "US", country := "USA"]
     datfinal[country == "England", country:= "UK"]
     mfinal <- merge(mapp,
-                datfinal[,.(.N,
-                            points = median(points, na.rm = T),
-                            price = median(price, na.rm = T)),
-                         by = country],
-                by.x = "region",
-                by.y = 'country',
-                all.x = T,
-                all.y = F,
-                sort = T)
-
+                    datfinal[,.(.N,
+                                points = median(points, na.rm = T),
+                                price = median(price, na.rm = T)),
+                             by = country],
+                    by.x = "region",
+                    by.y = 'country',
+                    all.x = T,
+                    all.y = F,
+                    sort = T)
+    
     mfinal <- mfinal[order(mfinal$order),]
     mfinal[is.na(N), N:=0]
     mfinal[,text:=sprintf("%s: %.0f wines <br>Median points: %.0f <br>Median price: %.0f$", region, N, points, price)]
-
+    
     # colouring worldmap based on median values
     g <- ggplot(mfinal, aes(text = text))+
       geom_polygon(aes(long, lat, group = group, fill = N))+
@@ -88,26 +88,26 @@ function(input, output, session) {
                           breaks = c(0, 1, 10, 100, 1000, 10000))+
       ggtitle("World Map of Wines")+
       theme_void()
-   
-  # scatterplot of points vs. price of wine based on user inputs   
-  output$winePlot1 = renderPlotly({
-    data = dat2%>% 
-      filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
-             is.null(input$cloudVariety) | variety %in% input$cloudVariety,
-             is.null(input$cloudGrape)   | Grape %in% input$cloudGrape,
-             price > input$WinePrice[1],
-             price < input$WinePrice[2],
-             points > input$WineRating[1],
-             points < input$WineRating[2]
-      ) 
-    length = nrow(data)
-    ggplot(data, aes(x = points , y= price, color = country)) + geom_point() + 
-      geom_jitter() + 
-      ggtitle("Cost versus Rating") +
-      xlab("Rating (out of 100)") + ylab("Price ($)") + 
-      theme(legend.position="bottom")
+    
+    # scatterplot of points vs. price of wine based on user inputs   
+    output$winePlot1 = renderPlotly({
+      data = dat2%>% 
+        filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
+               is.null(input$cloudVariety) | variety %in% input$cloudVariety,
+               is.null(input$cloudGrape)   | Grape %in% input$cloudGrape,
+               price > input$WinePrice[1],
+               price < input$WinePrice[2],
+               points > input$WineRating[1],
+               points < input$WineRating[2]
+        ) 
+      length = nrow(data)
+      ggplot(data, aes(x = points , y= price, color = country)) + geom_point() + 
+        geom_jitter() + 
+        ggtitle("Cost versus Rating") +
+        xlab("Rating (out of 100)") + ylab("Price ($)") + 
+        theme(legend.position="bottom")
     })
-
+    
     gg <- ggplotly(g)
     gg
   })
