@@ -10,6 +10,7 @@ shinyUI(dashboardPage
                          
                          sidebarMenu(
                            menuItem("Main",tabName = "main",icon = icon("dashboard")),
+                           menuItem("World",tabName = "world",icon = icon("globe")),
                            menuItem("Data",tabName = "data",icon = icon("table")),
                            menuItem("Info",tabName = "info",icon = icon("info-circle"))
                          ),
@@ -25,17 +26,19 @@ shinyUI(dashboardPage
                                      min = 10, max = 100, value = c(10,100)) ,
                          sliderInput("WineRating", "Select your desired rating range.",
                                      min = 80, max = 100, value = c(80,100))
-                         #numericInput("maxPrice", "Max Price:", 30, min = 0),
-                         #selectInput("Province", "Province", 
-                                    # c("All province"="", sort(unique(as.character(dat2$province)))), multiple = TRUE,
-                                    #selected = c('Oregon', 'Washington'))
                        ),
                        # functions that must go in the body of the dashboard.
                        dashboardBody(
                          tabItems(
                            tabItem(tabName = "main",
                                    fluidRow(
-                                     
+                                     valueBoxOutput("box0", width = 3),
+                                     valueBoxOutput("box1", width = 3),
+                                     valueBoxOutput("box2", width = 3),
+                                     valueBoxOutput("box3", width = 3),
+                                     br(),
+                                     br(),
+                                     br(),
                                      column(width = 6, height = 7,
                                             plotlyOutput("winePlot1")),
                                      column(width = 6, height = 7,
@@ -45,12 +48,14 @@ shinyUI(dashboardPage
                                      
                                    ),
                                    br(),
-                                   plotlyOutput("wm"),
                                    tags$head(
                                      tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
                                    )
                            ),
-                           
+                           tabItem(tabName = "world",
+                                   plotlyOutput("wm")
+                                   # hr()
+                           ),
                            tabItem(tabName = "data",
                                    downloadButton("download", "Download results"),
                                    br(),

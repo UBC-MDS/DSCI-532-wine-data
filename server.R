@@ -26,6 +26,48 @@ function(input, output, session) {
     options = list(scrollX = TRUE)
   )
   
+  # Output sumamry 1
+  output$box0 <- renderValueBox({
+    valueBox(
+      value = length(unique(data_reactive()$country)),
+      subtitle = h4("Unique Countries"),
+      icon = icon("flag"),
+      color = if (dim(data_reactive())[1] >= 500) "orange" else "yellow"
+    )
+  })
+  
+  # output summary 2
+  output$box1 <- renderValueBox({
+    valueBox(
+      value = median(data_reactive()$price),
+      subtitle = h4("Median Price"),
+      icon = icon("money-bill-alt"),
+      color = if (dim(data_reactive())[1] >= 500) "purple" else "blue"
+    )
+  })
+  # output summary 2
+  output$box2 <- renderValueBox({
+    valueBox(
+      value = median(data_reactive()$points),
+      subtitle = h4("Median Rating"),
+      icon = icon("thumbs-up"),
+      # Valid colors are: red, yellow, aqua, blue, light-blue, green, navy, teal, olive, 
+      # lime, orange, fuchsia, purple, maroon, black.
+      color = if (dim(data_reactive())[1] >= 500) "olive" else "green"
+    )
+  })
+  
+  output$box3 <- renderValueBox({
+    valueBox(
+      value = length(unique(data_reactive()$variety)),
+      subtitle = h4("Unique Wines"),
+      icon = icon("wine-glass-alt"),
+      # Valid colors are: red, yellow, aqua, blue, light-blue, green, navy, teal, olive, 
+      # lime, orange, fuchsia, purple, maroon, black.
+      color = if (dim(data_reactive())[1] >= 500) "maroon" else "red"
+    )
+  })
+  
   # download button for "data" page
   output$download <- downloadHandler(
     filename = function() {
@@ -53,10 +95,10 @@ function(input, output, session) {
     
     v <- getTermMatrix(df$description)
     
-    wordcloud_rep(names(v), v, scale=c(4,0.5),
+    wordcloud_rep(names(v), v, scale=c(3.5,0.25),
                   min.freq = 10, max.words=40,
                   colors=brewer.pal(8, "Dark2"))
-    title(main = 'Unigram Word Cloud', font.main = 4)#, cex.main = 1.5)
+    # title(main = 'Unigram Word Cloud', font.main = 4)#, cex.main = 1.5)
   })
   
   # wordmap plot based on input filters
@@ -89,26 +131,28 @@ function(input, output, session) {
       ggtitle("World Map of Wines")+
       theme_void()
     
-    # scatterplot of points vs. price of wine based on user inputs   
-    output$winePlot1 = renderPlotly({
-      data = dat2%>% 
-        filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
-               is.null(input$cloudVariety) | variety %in% input$cloudVariety,
-               is.null(input$cloudGrape)   | Grape %in% input$cloudGrape,
-               price > input$WinePrice[1],
-               price < input$WinePrice[2],
-               points > input$WineRating[1],
-               points < input$WineRating[2]
-        ) 
-      length = nrow(data)
-      ggplot(data, aes(x = points , y= price, color = country)) + geom_point() + 
-        geom_jitter() + 
-        ggtitle("Cost versus Rating") +
-        xlab("Rating (out of 100)") + ylab("Price ($)") + 
-        theme(legend.position="bottom")
-    })
-    
     gg <- ggplotly(g)
     gg
   })
+  
+  # scatterplot of points vs. price of wine based on user inputs 
+  output$winePlot1 = renderPlotly({
+    data = dat2%>% 
+      filter(is.null(input$cloudCountry) | country %in% input$cloudCountry,
+             is.null(input$cloudVariety) | variety %in% input$cloudVariety,
+             is.null(input$cloudGrape)   | Grape %in% input$cloudGrape,
+             price > input$WinePrice[1],
+             price < input$WinePrice[2],
+             points > input$WineRating[1],
+             points < input$WineRating[2]
+      ) 
+    length = nrow(data)
+    ggplot(data, aes(x = points , y= price, color = country)) + geom_point() + 
+      geom_jitter() + 
+      ggtitle("Cost versus Rating") +
+      xlab("Rating (out of 100)") + ylab("Price ($)") + 
+      theme(legend.position="bottom")
+  })
+  
+  
 }
