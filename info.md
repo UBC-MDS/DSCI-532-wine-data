@@ -1,8 +1,25 @@
-![](wine-image.jpg)
+![](img/wine-image.jpg)
 
-### About the app:
+## About the app:
 
 This app has been developed in order to help a wine connoisseur or a newbie get more information about the kinds and types of wines available around the world.
+
+### About the filters:
+
+1. Country filter = Filter the country you want to see in the corresponding word cloud and scatter plot.
+2. Variety Filter = The type of wine variety that you want to see in the corresponding word cloud and scatter plot.
+3. Grape Type filter = The type of grape data that you want to see in the corresponding word cloud and scatter plot.
+2. Desired price range filter = the price range filter can be set between 2 values through this slider bar.
+3. Desired rating range filter = the desired rating out of 100 can be set through this slider bar.
+
+### About the world map:
+
+The word map is an interactive map of the type of wines and the summary of type of wines found in the different countries across the world. When you hover over a country you will see the following data points:
+
+1. N: the percentage of data that is available for this country
+2. Country name
+3. Median Points: the median points given to a wine from this country.
+4. Median price: the median price of wine for a wine from this country.
 
 ### About the data:
 
@@ -10,7 +27,7 @@ The data has the following components:
 
 1. `country` -> country from which the wine can be found to be originated.
 2. `description` -> the text describing the type of wine
-3. `designation` -> 
+3. `designation` -> the designation of the wine taster.
 4. `points` -> the number of points alloted to a particular wine on a scale of 100.
 5. `price` -> the price of wine.
 6. `province` -> the province in which the wine could be found.
