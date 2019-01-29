@@ -32,7 +32,7 @@ function(input, output, session) {
       value = length(unique(data_reactive()$country)),
       subtitle = h4("Unique Countries"),
       icon = icon("flag"),
-      color = if (dim(data_reactive())[1] >= 500) "orange" else "yellow"
+      color = if (dim(dat2)[1] >= 500) "orange" else "yellow"
     )
   })
   
@@ -42,7 +42,7 @@ function(input, output, session) {
       value = median(data_reactive()$price),
       subtitle = h4("Median Price"),
       icon = icon("money-bill-alt"),
-      color = if (dim(data_reactive())[1] >= 500) "purple" else "blue"
+      color = if (dim(dat2)[1] >= 500) "purple" else "blue"
     )
   })
   # output summary 2
@@ -53,7 +53,7 @@ function(input, output, session) {
       icon = icon("thumbs-up"),
       # Valid colors are: red, yellow, aqua, blue, light-blue, green, navy, teal, olive, 
       # lime, orange, fuchsia, purple, maroon, black.
-      color = if (dim(data_reactive())[1] >= 500) "olive" else "green"
+      color = if (dim(dat2)[1] >= 500) "olive" else "green"
     )
   })
   
@@ -64,7 +64,7 @@ function(input, output, session) {
       icon = icon("wine-glass-alt"),
       # Valid colors are: red, yellow, aqua, blue, light-blue, green, navy, teal, olive, 
       # lime, orange, fuchsia, purple, maroon, black.
-      color = if (dim(data_reactive())[1] >= 500) "maroon" else "red"
+      color = if (dim(dat2)[1] >= 500) "maroon" else "red"
     )
   })
   
@@ -77,6 +77,33 @@ function(input, output, session) {
       write.csv(data_reactive(), con)
     }
   )
+  
+  observe({
+    cloudVariety <- if (is.null(input$cloudCountry)) character(0) else {
+      filter(dat2, country %in% input$cloudCountry) %>%
+        `$`('variety') %>%
+        unique() %>%
+        sort()
+    }
+    
+    stillSelected <- isolate(input$cloudVariety[input$cloudVariety %in% cloudVariety])
+    updateSelectInput(session, "cloudVariety", choices = cloudVariety,
+                      selected = stillSelected)
+  })
+  
+  observe({
+    cloudGrape <- if (is.null(input$cloudCountry)) character(0) else {
+      dat2 %>%
+        filter(variety %in% input$cloudVariety,
+               is.null(input$cloudVariety) | variety %in% input$cloudVariety) %>%
+        `$`('Grape') %>%
+        unique() %>%
+        sort()
+    }
+    stillSelected <- isolate(input$cloudGrape[input$cloudGrape %in% cloudGrape])
+    updateSelectInput(session, "cloudGrape", choices = cloudGrape,
+                      selected = stillSelected)
+  })
   
   # wordcloud plot based on input filters
   output$wc <- renderPlot({
