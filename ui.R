@@ -39,10 +39,10 @@ shinyUI(dashboardPage
                                      br(),
                                      br(),
                                      br(),
-                                     column(width = 6, height = 7,
-                                            plotlyOutput("winePlot1")),
-                                     column(width = 6, height = 7,
-                                            plotOutput("wc"))
+                                     column(width = 6,
+                                            plotlyOutput("winePlot1", height = 700)),
+                                     column(width = 6, height = 2,
+                                            plotOutput("wc", height = 700))
                                             
                                     
                                      
@@ -53,7 +53,7 @@ shinyUI(dashboardPage
                                    )
                            ),
                            tabItem(tabName = "world",
-                                   plotlyOutput("wm")
+                                   plotlyOutput("wm", height = 800)
                                    # hr()
                            ),
                            tabItem(tabName = "data",
