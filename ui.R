@@ -40,9 +40,9 @@ shinyUI(dashboardPage
                                      br(),
                                      br(),
                                      column(width = 6,
-                                            plotlyOutput("winePlot1", height = 700)),
+                                            plotlyOutput("winePlot1", height = 600)),
                                      column(width = 6, height = 2,
-                                            plotOutput("wc", height = 700))
+                                            plotOutput("wc", height = 600))
                                             
                                     
                                      
