@@ -6,7 +6,7 @@
 
 ### Link to writeup for Milestone 3
 
-[Milestone 3 writeup](https://github.com/UBC-MDS/DSCI-532-wine-data/blob/master/milestone4.md)
+[Milestone 4 writeup](https://github.com/UBC-MDS/DSCI-532-wine-data/blob/master/milestone4.md)
 
 ### Overview
 
