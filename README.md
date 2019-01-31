@@ -4,7 +4,7 @@
 
 [https://simranubc.shinyapps.io/Wine-data-analysis/](https://simranubc.shinyapps.io/Wine-data-analysis/)
 
-### Link to writeup for Milestone 3
+### Link to writeup for Milestone 4
 
 [Milestone 4 writeup](https://github.com/UBC-MDS/DSCI-532-wine-data/blob/master/milestone4.md)
 
