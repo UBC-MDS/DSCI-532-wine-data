@@ -4,15 +4,9 @@
 
 [https://simranubc.shinyapps.io/Wine-data-analysis/](https://simranubc.shinyapps.io/Wine-data-analysis/)
 
-### Link to the feedback given for Milestone 3
-
-FB1: [https://github.com/UBC-MDS/Mental-Health-Analysis_Vis-App/issues/27](https://github.com/UBC-MDS/Mental-Health-Analysis_Vis-App/issues/27)
-
-FB2: [https://github.com/UBC-MDS/college_scorecard/issues/15](https://github.com/UBC-MDS/college_scorecard/issues/15)
-
 ### Link to writeup for Milestone 3
 
-[Milestone 3 writeup](https://github.com/UBC-MDS/DSCI-532-wine-data/blob/master/milestone3.md)
+[Milestone 3 writeup](https://github.com/UBC-MDS/DSCI-532-wine-data/blob/master/milestone4.md)
 
 ### Overview
 
